@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Coumba Diop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  /* Reset & base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --primary-color: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --primary-light: #60a5fa;
+    --accent-color: #06b6d4;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    
+    /* Dark theme colors inspired by Cursor.com */
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #111111;
+    --bg-surface: #1a1a1a;
+    --bg-card: #1e1e1e;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --text-accent: #3b82f6;
+    
+    --border: #27272a;
+    --border-light: #3f3f46;
+    
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+    
+    /* Cursor.com inspired gradients */
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+    --gradient-secondary: linear-gradient(135deg, #1e1e1e 0%, #252525 100%);
+    --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-glow: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(139, 92, 246, 0.1) 100%);
+    --gradient-text: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+    
+    --blur-bg: rgba(0, 0, 0, 0.8);
+  }
+  
+  body {
+    margin: 0; 
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  
+  /* Animated background inspired by Cursor.com */
+  .background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 60% 60%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 10% 10%, rgba(6, 182, 212, 0.12) 0%, transparent 50%);
+    background-size: 400px 400px, 300px 300px, 500px 500px, 350px 350px, 450px 450px;
+    background-position: 0% 0%, 100% 100%, 50% 50%, 80% 80%, 20% 20%;
+    animation: backgroundShift 25s ease-in-out infinite;
+  }
+
+  @keyframes backgroundShift {
+    0%, 100% { 
+      background-position: 0% 0%, 100% 100%, 50% 50%, 80% 80%, 20% 20%;
+    }
+    25% { 
+      background-position: 100% 0%, 0% 100%, 80% 20%, 20% 80%, 50% 50%;
+    }
+    50% { 
+      background-position: 50% 100%, 50% 0%, 0% 50%, 100% 50%, 80% 20%;
+    }
+    75% { 
+      background-position: 0% 50%, 100% 50%, 20% 80%, 80% 20%, 50% 100%;
+    }
+  }
+
+  .floating-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 20s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+    25% { transform: translateY(-30px) rotate(90deg); opacity: 0.2; }
+    50% { transform: translateY(-60px) rotate(180deg); opacity: 0.1; }
+    75% { transform: translateY(-30px) rotate(270deg); opacity: 0.2; }
+  }
+
+  .particle:nth-child(1) { top: 10%; left: 10%; width: 6px; height: 6px; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 60%; left: 20%; width: 4px; height: 4px; animation-delay: 2s; }
+  .particle:nth-child(3) { top: 40%; left: 70%; width: 8px; height: 8px; animation-delay: 4s; }
+  .particle:nth-child(4) { top: 80%; left: 80%; width: 5px; height: 5px; animation-delay: 6s; }
+  .particle:nth-child(5) { top: 30%; left: 50%; width: 7px; height: 7px; animation-delay: 8s; }
+
+  /* Header with glassmorphism */
+  header {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0;
+    background: var(--blur-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
+  }
+
+  header h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.75rem;
+    letter-spacing: -0.025em;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+  }
+
+  header h1::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-text);
+    filter: blur(8px);
+    opacity: 0.3;
+    z-index: -1;
+  }
+  
+  nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    color: var(--text-secondary);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+  
+  nav a:hover, nav a.active {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+  }
+
+  nav a:hover::before, nav a.active::before {
+    left: 0;
+  }
+
+  /* Main container */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 2rem 4rem 2rem;
+  }
+  
+  /* Hero section */
+  #accueil {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4rem;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 0;
+    min-height: 80vh;
+  }
+  
+  #accueil .photo {
+    flex: 0 0 300px;
+    margin-left: 18px;
+    max-width: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 4px var(--bg-surface), 0 0 0 8px var(--primary-color), var(--shadow-xl);
+    transition: all 0.4s ease;
+  }
+
+  #accueil .photo:hover {
+    transform: scale(1.05) rotate(0deg);
+    box-shadow: 0 0 0 4px var(--bg-surface), 0 0 0 8px var(--accent-color), 0 30px 60px rgba(0, 0, 0, 0.5);
+  }
+  
+  #accueil .photo img {
+    width: 100%;
+    display: block;
+    height: auto;
+    object-fit: cover;
+    transform: scaleX(-1);
+    transition: all 0.4s ease;
+  }
+
+  #accueil .photo:hover img {
+    transform: scaleX(-1) scale(1.1);
+  }
+  
+  #accueil .presentation {
+    flex: 1 1 500px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin: 0 20px;
+  }
+
+  #accueil .presentation p {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 24px;
+    margin: 0;
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  #accueil .presentation p::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+  }
+  
+  #accueil .btn-cv {
+    display: inline-block;
+    margin-top: 2rem;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #accueil .btn-cv::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  #accueil .btn-cv:hover::before {
+    left: 100%;
+  }
+
+  #accueil .btn-cv:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+  }
+  
+  #accueil .btn-cv:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 6rem;
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  section::before {
+    display: none;
+  }
+
+  section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(139, 92, 246, 0.1) 100%);
+  }
+  
+  section h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 3rem;
+    letter-spacing: -0.025em;
+    position: relative;
+  }
+
+  section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+  }
+
+  /* Formation section */
+  #formation {
+    background: var(--bg-surface);
+  }
+  
+  #formation h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-accent);
+    margin-left: 30px;
+    position: relative;
+    font-weight: 600;
+  }
+
+  #formation h3::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 24px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+  }
+  
+  #formation p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    margin-right: 20%;
+    margin-left: 40px;
+    color: var(--text-secondary);
+  }
+  
+  #formation ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  #formation ul li {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-left: 40px;
+    position: relative;
+    padding-left: 30px;
+  }
+
+  #formation ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--success);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  /* Scrolling banner */
+  #bande-defilante {
+    color: var(--text-secondary);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 1.5rem 0;
+    border-radius: 16px;
+    margin: 4rem 0;
+    background: var(--bg-surface);
+    border-left: 6px solid var(--primary-color);
+    position: relative;
+  }
+
+  #bande-defilante::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(to right, var(--bg-primary), transparent);
+    z-index: 1;
+  }
+
+  #bande-defilante::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(to left, var(--bg-primary), transparent);
+    z-index: 1;
+  }
+  
+  .defilante-texte {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transform: translateX(0);
+    transition: transform 0s;
+    padding: 0 2rem;
+  }
+  
+  #bande-defilante:hover .defilante-texte {
+    animation: defilement 35s linear forwards;
+  }
+
+  @keyframes defilement {
+    from { transform: translateX(0); }
+    to { transform: translateX(-70%); }
+  }
+
+  /* Competences with modern design */
+  .competence-item {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: var(--bg-surface);
+    position: relative;
+    z-index: 1;
+    box-shadow: none;
+  }
+
+  .competence-item::before {
+    display: none;
+  }
+  
+  .competence-item:hover {
+    border-radius: 16px;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+    border-color: var(--primary-color);
+    z-index: 10;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 50%, rgba(139, 92, 246, 0.05) 100%);
+  }
+
+  .competence-item:hover::before {
+    display: none;
+  }
+  
+  .competence-header {
+    background: var(--bg-card);
+    padding: 1.5rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-accent);
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-radius: 16px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .competence-header:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(139, 92, 246, 0.1) 100%);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+  }
+  
+  .competence-content {
+    padding: 2rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    display: none;
+    animation: fadeInUp 0.4s ease forwards;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+    background: var(--bg-surface);
+  }
+  
+  .competence-content.show {
+    display: block;
+  }
+  
+  .competence-content p {
+    margin-top: 0;
+  }
+
+  .competence-content details {
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    background: var(--bg-card);
+  }
+
+  .competence-content summary {
+    padding: 1rem 1.5rem;
+    background: var(--bg-surface);
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-accent);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .competence-content summary:hover {
+    background: var(--bg-card);
+  }
+
+  .competence-content details[open] summary {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .competence-content details > *:not(summary) {
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .toggle-icon {
+    font-weight: 700;
+    font-size: 1.5rem;
+    user-select: none;
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--text-accent);
+    position: relative;
+    z-index: 4;
+  }
+  
+  .toggle-icon.rotate {
+    transform: rotate(45deg);
+    background: var(--primary-color);
+    color: white;
+  }
+
+  /* Fix for competence content iframes and images */
+  .competence-content iframe {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .competence-content img {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .competence-content .download-cv {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Fix for competence section positioning */
+  #competences {
+    position: relative;
+    z-index: 1;
+  }
+
+  #competences section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ensure competence items stay within their container */
+  .competence-item {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  .competence-item:hover {
+    z-index: 100;
+  }
+
+  /* Fix for any floating elements */
+  .competence-content > div {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Remove unwanted lines between competence items */
+  .competence-item + .competence-item {
+    border-top: none;
+  }
+
+  .competence-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .competence-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Ensure no decorative lines appear */
+  .competence-item::after {
+    display: none;
+  }
+
+  .competence-header::before,
+  .competence-header::after {
+    display: none;
+  }
+
+  .competence-content::before,
+  .competence-content::after {
+    display: none;
+  }
+
+  /* Disable all pseudo-elements in competence section */
+  #competences *::before,
+  #competences *::after {
+    display: none !important;
+  }
+
+  /* Stage section */
+  #stage {
+    background: var(--bg-surface);
+  }
+
+  .stage-container {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .stage-item {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stage-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+  }
+
+  .stage-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 50%, rgba(139, 92, 246, 0.05) 100%);
+  }
+
+  .stage-header {
+    margin-bottom: 2rem;
+  }
+
+  .stage-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-accent);
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .stage-badge {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .stage-company {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem 0;
+  }
+
+  .stage-location, .stage-duration {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-content {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .stage-section {
+    background: var(--bg-surface);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+  }
+
+  .stage-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-accent);
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .stage-section p {
+    color: var(--text-secondary);
+    margin: 0 0 1rem 0;
+    line-height: 1.7;
+  }
+
+  .stage-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .stage-section li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .stage-section li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--success);
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .competences-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .competence-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--bg-card);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+  }
+
+  .competence-badge:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(139, 92, 246, 0.1) 100%);
+    transform: translateX(4px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+  }
+
+  .competence-badge::before {
+    content: '✓';
+    color: var(--success);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  /* CV Section */
+  #cv, #cv-cv {
+    text-align: center;
+  }
+
+  #cv iframe, #cv-cv iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--shadow-xl);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    background: var(--bg-surface);
+  }
+
+  #cv iframe:hover, #cv-cv iframe:hover {
+    transform: scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  }
+  
+  #cv .download-cv, #cv-cv .download-cv {
+    display: inline-block;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+  }
+  
+  #cv .download-cv:hover, #cv-cv .download-cv:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+  }
+
+  /* Download button - global style */
+  .download-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--gradient-primary);
+    color: #fff;
+    padding: 0.9rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-cv::before {
+    content: '⬇';
+    font-size: 1rem;
+    line-height: 1;
+    opacity: 0.95;
+  }
+
+  .download-cv:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(59, 130, 246, 0.45);
+  }
+
+  .download-cv:active {
+    transform: translateY(-1px);
+  }
+
+  .download-cv:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35), var(--shadow-lg);
+  }
+
+  /* CV Tabs */
+  .cv-tabs {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .cv-tabs .tablist {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .cv-tabs .tab {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .cv-tabs .tab:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+  }
+  .cv-tabs .tab.active {
+    background: var(--gradient-primary);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-lg);
+  }
+  .cv-tabs .tab-panels {
+    margin-top: 1rem;
+  }
+  .cv-tabs .tab-panel[hidden] {
+    display: none;
+  }
+
+  /* À propos modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.show {
+    display: flex;
+  }
+
+  .modal {
+    width: min(1000px, 92vw);
+    height: min(80vh, 90vh);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: var(--bg-surface);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* À propos content (direct text) */
+  .apropos-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .apropos-content .prose {
+    text-align: left;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+
+  .apropos-collapsible {
+    max-height: 320px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease;
+  }
+
+  .apropos-collapsible.expanded {
+    max-height: none;
+  }
+
+  .apropos-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(30,30,30,0), var(--bg-card));
+    pointer-events: none;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+  }
+
+  .apropos-collapsible.expanded + .apropos-fade {
+    display: none;
+  }
+
+  /* Ensure rounded corners are preserved before expansion */
+  #apropos {
+    overflow: hidden;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--bg-secondary);
+    color: white;
+    padding: 3rem 2rem 2rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-primary);
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+  }
+
+  .footer-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .social-link:hover::before {
+    left: 100%;
+  }
+
+  .social-link:hover {
+    transform: translateY(-3px);
+    background: var(--bg-surface);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .social-link.linkedin:hover {
+    background: rgba(0, 119, 181, 0.2);
+    border-color: #0077B5;
+  }
+
+  .social-link.email:hover {
+    background: rgba(234, 67, 53, 0.2);
+    border-color: #EA4335;
+  }
+
+  .social-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: all 0.3s ease;
+  }
+
+  .social-link:hover .social-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .footer-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 1rem 0;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    header {
+      padding: 1rem;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    nav {
+      justify-content: center;
+      gap: 0.25rem;
+    }
+
+    nav a {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    main {
+      padding: 100px 1rem 2rem 1rem;
+    }
+
+    #accueil {
+      flex-direction: column;
+      padding: 3rem 0;
+      gap: 2rem;
+    }
+    
+    #accueil .presentation {
+      text-align: center;
+      margin: 0;
+    }
+
+    section {
+      padding: 2rem 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 2rem;
+    }
+
+    #formation {
+      padding: 2rem 1.5rem;
+    }
+
+    #formation p {
+      margin-right: 0;
+      margin-left: 20px;
+    }
+
+    #formation h3 {
+      margin-left: 10px;
+    }
+
+    #formation ul li {
+      margin-left: 20px;
+    }
+
+    .competence-header {
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .competence-content {
+      padding: 1.5rem;
+    }
+
+    #accueil .btn-cv {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      padding: 2rem 1rem 1.5rem;
+    }
+    
+    .footer-title {
+      font-size: 1.25rem;
+    }
+    
+    .social-links {
+      gap: 1rem;
+    }
+    
+    .social-link {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    main {
+      padding: 0 0.5rem;
+    }
+    
+    section {
+      padding: 1.5rem 1rem;
+      border-radius: 16px;
+    }
+    
+    #formation {
+      padding: 1.5rem 1rem;
+    }
+  }
+  </style>
+</head>
+<body>
+<!-- Animated background inspired by Cursor.com -->
+<div class="background-animation"></div>
+
+<div id="start">
+  <span> Informatique | Mathématiques | Statistique </span>
+</div>
+
+<header>
+  <h1>Coumba Diop</h1>
+  <nav>
+    <a href="#accueil" class="nav-link active">Accueil</a>
+    <a href="#apropos" class="nav-link">À propos</a>
+    <a href="#formation" class="nav-link">Formation</a>
+    <a href="#competences" class="nav-link">Compétences</a>
+    <a href="#stage" class="nav-link">Stage</a>
+    <a href="#cv-cv" class="nav-link">CV</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Accueil -->
+  <section id="accueil" tabindex="0" style="scroll-margin-bottom: -810px;">
+    <div class="photo">
+      <img src="IMG-20250620-WA0001.jpg" alt="Photo de Coumba Diop" />
+    </div>
+    <div class="presentation">
+      <p>
+        Je suis <strong>COUMBA DIOP</strong> et j'ai 20 ans.<br>
+        Passionnée par les mathématiques et l'informatique, j'ai choisi de me spécialiser dans le domaine des données pour développer mes compétences en analyse de données et en programmation.
+        Je suis une personne curieuse, qui aime apprendre de nouvelles choses.<br>J'aime travailler en équipe et je suis toujours à l'écoute des idées et des suggestions des autres.
+      </p>
+      <a href="#cv-cv" class="btn-cv">Télécharger mon CV</a>
+    </div>
+  </section>
+
+  <!-- À propos de ce portfolio -->
+  <div id="bande-defilante" aria-label="Annonce défilante">
+    <div class="defilante-texte">
+      Ce portfolio présente mes compétences et réalisations en Sciences des Données. Vous y découvrirez mes compétences en statistique, programmation, analyse de données, et bien d'autres domaines. N'hésitez pas à explorer mon portfolio pour en savoir plus sur mes compétences en Science des Données et découvrir les projets passionnants auxquels j'ai contribué.
+    </div>
+  </div>
+
+  <!-- À propos -->
+  <section id="apropos" tabindex="0" style="scroll-margin-bottom: -810px;">
+    <h2>À propos</h2>
+    <div class="apropos-content">
+      <div class="prose">
+        <div id="apropos-collapsible" class="apropos-collapsible">
+          <p>
+            Je m’appelle <strong>Coumba Diop</strong> et je termine actuellement un baccalauréat en informatique et science des données à l’Université du Québec à Chicoutimi. Mon intérêt pour ce domaine est né d’un moment très simple : en regardant mon père faire ses comptes dans un cahier, j’ai voulu l’aider. J’ai ouvert Excel, j’ai structuré ses données, mis des couleurs, et j’ai compris ce jour-là à quel point les outils, même simples, peuvent changer la façon de prendre des décisions. C’est ce déclic qui m’a donné envie de me former à l’analyse de données.
+          </p>
+          <p>
+            J’ai commencé mes études en France, avec un BUT en sciences des données à l’IUT Clermont Auvergne. J’y ai appris à traiter des données structurées, à automatiser des traitements et à analyser statistiquement des informations. Dès la deuxième année, je me suis spécialisée en exploration et modélisation statistique. Pour ma dernière année, j’ai rejoint l’Université du Québec à Chicoutimi dans le cadre d’une double diplomation. Cette expérience m’a permis d’approfondir mes compétences en intelligence d’affaires et de découvrir un environnement plus appliqué, tourné vers les besoins métiers.
+          </p>
+          <p><strong>Projets techniques réalisés :</strong></p>
+          <ul>
+            <li>collecte et traitement de données,</li>
+            <li>automatisation de processus avec des outils comme Talend,</li>
+            <li>création de visualisations avec RStudio,</li>
+            <li>conception de tableaux de bord interactifs sur Power BI.</li>
+          </ul>
+          <p>
+            Ces projets m’ont appris à structurer les données efficacement, à automatiser les tâches répétitives, et surtout à présenter des résultats compréhensibles et utiles pour appuyer les décisions.
+          </p>
+          <p><strong>Expériences professionnelles :</strong></p>
+          <ul>
+            <li>
+              <strong>Observatoire des Formations et du Devenir des Étudiants (OFDE)</strong> : j’ai conçu et diffusé un questionnaire sur le devenir des diplômés, puis analysé et présenté les résultats de façon synthétique.
+            </li>
+            <li>
+              <strong>Ministère de la cybersécurité et du numérique (Québec)</strong> : j’ai travaillé sur la fiabilité des rapports Power BI, restructuré le modèle de données et automatisé des traitements via SQL. J’ai commencé à temps partiel pendant mes études, puis poursuivi à temps plein en tant que stagiaire dès la fin de ma session d’hiver.
+            </li>
+          </ul>
+          <p>
+            Ce parcours m’a appris à être autonome, rigoureuse et adaptable. Je cherche aujourd’hui à rejoindre une équipe dans laquelle je pourrai contribuer à des projets concrets, où les données ont un réel impact sur les décisions prises. Ce qui me motive, c’est de produire des analyses claires, utiles et compréhensibles, et de continuer à apprendre au contact de professionnels engagés.
+          </p>
+        </div>
+        <div class="apropos-fade"></div>
+        <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <button id="toggle-apropos" class="download-cv" type="button" aria-expanded="false">Lire plus</button>
+          <a href="Presentation_CD_VF.pdf" class="download-cv" download>Télécharger (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formation -->
+  <section id="formation" tabindex="0" style="scroll-margin-bottom: -810px;">
+    <h2>Formation</h2>
+    <div class="formation-content">
+      <h3>Formation actuelle</h3>
+      <p>
+        Troisième année en baccalauréat de l'Informatique de la Science des Données et de l'Intelligence d'Affaires (Double diplomation entre l'IUT Clermont Auvergne (France) et l'UQAC)
+      </p>
+
+      <h3>Diplômes obtenus</h3>
+      <ul>
+        <li><strong>Baccalauréat scientifique</strong> (Diplôme d'études secondaires), obtenu en juillet 2022</li>
+        <li><strong>Diplôme Universitaire de Technologie (DUT)</strong> spécialité Sciences des Données, parcours Explorations et Modélisation Statistique, conférant 120 crédits européens</li>
+        <li><strong>Bachelor Unisitaire de Technologie (BUT)</strong> spécialité Sciences des Données à l'IUT Clermont Auvergne</li>
+        <li><strong>Baccalauréat en informatique</strong> de la science des données et l'intelligence artificielle d'affaires à l'Université du Québec à Chicoutimi</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Compétences -->
+  <section id="competences" tabindex="0" style="scroll-margin-bottom: -810px;">
+    <h2>Compétences</h2>
+
+    <article class="competence-item">
+      <header class="competence-header" tabindex="0" role="button" aria-expanded="false" aria-controls="comp1-content" onclick="toggleCompetence(this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleCompetence(this)">
+        Traiter des données à des fins décisionnelles
+        <span class="toggle-icon">+</span>
+      </header>
+      <div id="comp1-content" class="competence-content" aria-hidden="true">
+        <p>Durant ma formation en Sciences des Données, j'ai développé des compétences concrètes en informatique à travers des enseignements comme <strong>Tableur et Reporting</strong>, <strong>Bases de Données Relationnelles</strong> et <strong>Programmation</strong>. Même si mes résultats ont parfois été contrastés, ces matières m'ont permis d'acquérir des savoir-faire que j'ai mobilisés dans plusieurs projets, notamment en <em>analyse et visualisation de données</em>.</p>
+
+        <details>
+          <summary><strong> SAE : Création et Reporting (Projet DUT SD – 1ère année)</strong></summary>
+          <p>Ce projet a été réalisé en binôme. De mon côté, j'ai assuré la <strong>connexion des données réparties sur quatre tables</strong> à l'aide de <code>LibreOffice Base</code> et <code>ODBC</code>, ainsi que l'<strong>analyse statistique</strong> des données concernant les accidents de la route au Royaume-Uni (2020).</p>
+
+          <p>J'ai mis en place des tableaux de bord interactifs à l'aide de <code>LibreOffice Calc</code>, intégrant :</p>
+          <ul>
+            <li>Des diagrammes à barres et histogrammes</li>
+            <li>Des diagrammes circulaires et des statistiques descriptives</li>
+            <li>Des insights sur les lieux d'accidents, les types de véhicules, l'impact des limitations de vitesse, etc.</li>
+          </ul>
+
+          <p>Résultat : un rapport détaillé, des reportings commentés (<code>.ods</code>) et un jeu de <strong>codes documentés</strong> que vous pouvez consulter dans cette section. Cette SAE a renforcé mes compétences en <strong>gestion de données, datavisualisation et synthèse de résultats</strong>.</p>
+        </details>
+        <div id="cv" tabindex="0" style="box-shadow: none;">
+            <h3>Annexe 1 : Reporting Sécurité routiere au Royaume Uni</h3>
+            <iframe style="box-shadow: none;" src="sae-creation-et-reporting-DIOP.pdf" title="Annexe 1 SAE Creattion et reporting"></iframe>
+            <a href="sae-creation-et-reporting-DIOP.pdf" class="download-cv" download>Télécharger l'annexe 1 (PDF)</a>
+        </div><br>
+        <details>
+            <summary>
+                <strong>Lecture/Ecriture de fichiers :</strong>
+            </summary>
+            <p>
+                Pendant cette SAE, j'ai acquis les compétences suivantes :
+                Manipulation de fichiers de données CSV
+                Lecture et écriture de fichiers CSV en utilisant des bibliothèques dont  Pandas
+                Nettoyage de données pour préparer l'analyse de données
+                Cette SAE a été réalisée en binôme, et nous avions deux fichiers, A et B, à traiter. 
+                Chaque membre du binôme était responsable du prétraitement d'un fichier spécifique. 
+                J'ai rencontré des difficultés pour prétraiter mon fichier en raison de  mes lacunes en Python, mais mon binôme m'a aidé à surmonter ces obstacles. 
+                En fin de compte, nous avons fusionné nos deux fichiers.
+                <div id="cv" tabindex="0" style="box-shadow: none;">
+                    <h3>Annexe 2 : Script SAE Ecriture et Lecture de fichier</h3>
+                    <iframe style="box-shadow: none;" src="script_lececr.pdf" title="Annexe 2 Script SAE Ecriture et Lecture de fichier"></iframe>
+                    <a href="script_lececr.pdf" class="download-cv" download>Télécharger l'annexe 2 (PDF)</a>
+                </div>
+            </p>
+        </details>
+        <details>
+            <summary>
+                <strong>Éclairez vos données : Explorez le potentiel de Power BI !</strong>
+            </summary>
+            <p>
+            Power BI est un outil puissant de visualisation de données qui permet de créer des tableaux de bord interactifs et des rapports visuels. 
+            L'utilisation de Power BI m'a permis d'acquérir plusieurs compétences, notamment :
+            Utilisation de Power Query pour la manipulation et la mise en forme des données.
+            Maîtrise du langage de Power BI pour créer des relations complexes entre les tables de données.
+            Présentation claire et pragmatique des données grâce aux fonctionnalités de visualisation et de création de rapports de Power BI.
+            <div id="cv" tabindex="0" style="box-shadow: none;">
+                <h3>Annexe 3 : Analyse de réservations d'hotels</h3>
+                <img style="box-shadow: none; object-fit: contain; width: 100%; height: auto;" src="Capture d'écran 2023-06-02 à 20.23.06.png" title="Annexe 3 Analyse de réservations d'hotels"></img>
+                <a href="Capture d'écran 2023-06-02 à 20.23.06.png" class="download-cv" download>Télécharger l'annexe 3 (PDF)</a>
+            </div>
+            <div id="cv" tabindex="0" style="box-shadow: none;">
+                <h3>Annexe 4 : Analyse des données du BAC en France</h3>
+                <iframe style="box-shadow: none;" src="Capture d'écran 2023-06-04 à 01.19.31.pdf" title="Annexe 4 Analyse des données du BAC en France"></iframe>
+                <a href="Capture d'écran 2023-06-04 à 01.19.31.pdf" class="download-cv" download>Télécharger l'annexe 4 (PDF)</a>
+            </div>
+            <br>
+            <strong><u>Difficultés rencontrées avec l'outil Power Bi :</u></strong> 
+            Compréhension des fonctionnalités avancées de Power BI.
+            Gestion des relations entre les tables de données provenant de sources multiples et hétérogènes.
+            Optimisation des performances lors de la manipulation de grandes quantités de données.
+            </p>
+            <p>
+            <strong>SAE Sécurité des bases de données : </strong>Ce projet a été réalisé en groupe de 3 dans le cadre du module de bases de données relationnelles 2.
+            Dans ce projet, nous avons mis en place un modèle de contrôle d'accès basé sur les rôles (RBAC) pour sécuriser une base de données de gestion d'un hôpital. Notre objectif était d'identifier les rôles et les droits d'accès et de les implémenter à l'aide du système de gestion de base de données PostgreSQL.
+            <br><strong>Présentation du RBAC :</strong>
+            Le RBAC est un modèle d'autorisation basé sur les rôles des utilisateurs. 
+            Il gère l'accès aux ressources en définissant les permissions accordées aux utilisateurs. 
+            Ce modèle permet une gestion centralisée des autorisations et sécurise les systèmes contenant des données sensibles.
+            <br><strong>Outils utilisés:</strong>
+            Sécurité des bases de données: Méthodes telles que le RBAC sont utilisées pour protéger les données sensibles dans les bases de données.
+            Gestion des rôles et des droits d'accès: Méthode pour organiser l'accès aux données en attribuant des rôles avec des droits spécifiques aux utilisateurs.
+            PostgreSQL: Système de gestion de base de données relationnelles open-source, utilisé pour implémenter la sécurité et gérer les rôles et les droits d'accès.
+            Nous avons réussi à mettre en place un système de contrôle d'accès RBAC pour une base de données d'hôpital, en assurant la protection des données sensibles et en permettant une gestion des autorisations.
+            Ce projet m'a permis de mettre en pratique les méthodes et outils de sécurité des bases de données en utilisant PostgreSQL. 
+            </p>
+        </details>
+      </div>
+    </article>
+
+    <article class="competence-item">
+      <header class="competence-header" tabindex="0" role="button" aria-expanded="false" aria-controls="comp2-content" onclick="toggleCompetence(this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleCompetence(this)">
+        Analyser statistiquement les données
+        <span class="toggle-icon">+</span>
+      </header>
+      <div id="comp2-content" class="competence-content" aria-hidden="true">
+        <strong>Présentation de l'UE</strong>
+        <p>Cette UE est une composante essentielle de mon parcours en Sciences des Données qui vise à développer mes compétences en matière d'analyse statistique, de préparation de données et d'interprétation des résultats.
+          Au cours de cette UE, j'ai acquis des compétences variées grâce à des enseignements tels que la statistique descriptive, les probabilités, les mathématiques, et l'algèbre. 
+          J'ai également mis en pratique ces connaissances à travers diverses SAE, telles que la préparation et la synthèse d'un tableau de données, l'analyse statistique d'une enquête et la régression sur données réelles.
+        </p>
+        <details>
+          <summary><strong>Compétences acquises </strong></summary>
+          <p>
+            En<strong> mathématiques</strong>, j'ai consolidé mes connaissances en calculs de limites, primitives, calcul intégral et en étude de suites numériques. La maîtrise de ces concepts mathématiques m'a permis de comprendre les fondements théoriques des compétences statistiques, notamment lorsqu'il s'agit de manipuler des formules statistiques, d'effectuer des calculs et d'interpréter les résultats statistiques.
+            <br>En<strong> statistique descriptive</strong>, j'ai acquis des compétences pour explorer et présenter des données, calculer des indicateurs de tendance centrale(moyenne,médiane et mode) et de dispersion(la variance, l'écart type, l'étendue et les les quartiles), effectuer des analyses bivariées.
+            <br>En<strong> probabilités</strong>, j'ai appris à simuler des lois de probabilité, ainsi qu'à calculer l'espérance et la variance.
+            <br>En<strong> statistique inférentielle</strong>, j'ai développé des compétences pour estimer et interpréter les résultats statistiques.
+            Bien que j'aie rencontré des difficultés au début avec les bases de l'algèbre, j'ai acquis des compétences fondamentales en algèbre linéaire. J'ai appris à manipuler des matrices.
+          </p>
+        </details>
+        <details>
+          <summary><strong>Analyse de la qualité de sommeil des étudiants : Facteurs et impacts</strong></summary>
+          <p>
+            Dans le cadre de cette SAE de statistique descriptive univariée, nous avons analysé les facteurs influençant la qualité du sommeil des étudiants. Nous avons prétraité les données sur Excel et les avons importées dans RStudio pour effectuer notre analyse. Nous avons constaté que les habitudes de sommeil variaient en fonction des périodes (semaine, week-end, vacances) et que les étudiants avaient tendance à se coucher plus tard et à se lever plus tard pendant les week-ends et les vacances, ce qui améliorait la durée et la qualité de leur sommeil.
+            À l'aide de graphiques et de tableaux créés avec RStudio, nous avons mis en évidence l'impact de différents critères sur le sommeil des étudiants. Cependant, nous avons noté des limitations liées à la taille réduite de notre échantillon.
+            Cette étude m'a permis de mieux comprendre les facteurs influençant le sommeil des étudiants et leur santé mentale.J'ai identifié l'importance d'une routine de sommeil et d'un temps de sommeil suffisant.
+          </p>
+          <div id="cv" tabindex="0" style="box-shadow: none;">
+            <iframe style="box-shadow: none;" src="SAE-Sommeil.pdf" title="Analyse de la qualité de sommeil des étudiants"></iframe>
+            <a href="SAE-Sommeil.pdf" class="download-cv" download>Télécharger (PDF)</a>
+          </div>
+        </details>
+        <details>
+          <summary><strong>Exploration de l'outil R pour l'analyse de données</strong></summary>
+          <p>
+          J'ai eu l'opportunité de découvrir et d'utiliser l'outil R, un langage de programmation dédié à l'analyse de données et à la statistique. Au cours de cette expérience, j'ai acquis plusieurs compétences significatives et j'ai également identifié certaines difficultés liées à l'utilisation de Python en conjonction avec R.
+
+          <br><strong>Compétences acquises:</strong>
+          <ul>
+            <li>
+              Manipulation et transformation des données  :  Importation, nettoyage et transformation des données, gestion des données manquantes, fusion de tables et création de nouvelles variables.
+            </li>
+            <li>
+              Visualisation des données : J'ai exploré plusieurs bibliothèques graphiques de R, telles que ggplot2, pour créer des visualisations attrayantes et informatives.
+            </li>
+            <li>
+              Analyse statistique : Utilisation de R pour effectuer des analyses statistiques avancées telles que la régression et les tests d'hypothèses
+            </li>
+            <li>
+              Maîtrise de R Markdown : Utilisation de R Markdown pour la création de documents et de rapports intégrant du code R, des analyses et des visualisations.
+            </li>
+          </ul>
+          </p>
+        </details>
+        <details>
+          <summary><strong>Mise en oeuvre d'une enquête</strong></summary>
+          <p>
+            <img style="width: 600px; height: auto;" src="Capture d'écran 2023-06-06 à 01.12.38.png" alt="projet d'enquete"><br>
+            Ce projet en groupe avait pour objectif d'étudier l'impact de l'alimentation sur la forme physique et mentale des étudiants. Nous avons réalisé un questionnaire et rédigé un texte explicatif de nos choix. En utilisant RStudio, nous avons analysé les résultats d'une enquête précédente et extrait des informations clés grâce à la statistique descriptive. 
+            Des visualisations graphiques ont été créées pour rendre les résultats plus compréhensibles.
+            Cette SAE a renforcé mes compétences en analyse statistique, manipulation de données avec RStudio et présentation visuelle des résultats. J'ai acquis une expérience concrète dans la mise en place d'une enquête, de la rédaction du questionnaire à l'interprétation des données.
+          </p>
+        </details>
+        <details>
+          <summary><strong>Nouvelles Compétences Acquises en 2ème Année</strong></summary>
+          <ul>
+            <li>
+              <strong>Test d'hypothèses pour l'analyse bi-variée :</strong> nous avons exploré la formulation et le test d'hypothèses statistiques pour évaluer les relations entre deux variables. J'ai développé des compétences spécifiques dans l'application du test du khi-deux et de l'analyse de variance (ANOVA). Une difficulté rencontrée a été de comprendre les conditions d'application de chaque test et d'interpréter correctement les résultats.
+            </li>
+            <li>
+              <strong>Classification automatique :</strong> J'ai acquis des compétences en techniques de classification telles que les k-means, les arbres de décision et les réseaux de neurones. L'objectif était de regrouper des données en catégories distinctes basées sur des caractéristiques similaires. Une difficulté rencontrée était de déterminer le nombre optimal de classes et de traiter les données bruitées.</li>
+            <li>
+              <strong>Méthodes factorielles :</strong> Nous avons utilisé des méthodes factorielles telles que l'analyse en composantes principales (ACP) et l'analyse factorielle des correspondances (AFC) pour réduire la dimensionnalité des données et identifier des structures sous-jacentes. J'ai appris à interpréter les résultats et à visualiser les données de manière significative. La complexité mathématique et l'interprétation des axes factoriels ont été des défis importants.
+            </li>
+          </ul>
+        </details>
+        <details>
+          <summary><strong>Compétences en Séries Chronologiques</strong></summary>
+          <ul>
+            <li>
+              <strong>Méthodes de Lissage, Tendance et Périodicité :</strong> J'ai appris à utiliser des méthodes de lissage pour atténuer les fluctuations dans les séries chronologiques. L'analyse de la tendance permet d'identifier les trajectoires à long terme, tandis que l'étude de la périodicité révèle les cycles récurrents dans les données.
+            </li>
+            <li>
+              <strong>Modélisation :</strong> J'ai utilisé des modèles additifs et multiplicatifs pour décomposer les séries chronologiques en composantes de tendance, saisonnalité et bruit. Ces modèles m'ont aidé à mieux comprendre et prédire le comportement des données.
+            </li>
+            <li>
+              <strong>Détection des Anomalies et Cassures :</strong> J'ai développé des techniques pour détecter les anomalies (valeurs aberrantes) et les cassures (changements structurels) dans les séries chronologiques. Cela m'a permis d'identifier les moments où des événements inhabituels affectaient le comportement des données.
+            </li>
+          </ul>
+        </details>
+        <details>
+          <summary><strong>Description et prévision de données temporelles</strong></summary>
+          <p>Ce projet visait à étudier l'impact de l'introduction d'une nouvelle intersection (I4) le 1er janvier 2017 sur la circulation aux abords d'une ville. Nous avons analysé les données de trafic avant et après cette date pour évaluer le désengorgement des trois intersections préexistantes (I1, I2, I3), détecter des anomalies de circulation, et prévoir les flux de trafic futurs.</p>
+          <ul>
+            <li>
+              <strong>Objectifs :</strong>
+              <ol>
+                <li>
+                  Évaluer l'effet de l'intersection I4 sur le désengorgement des intersections I1, I2, et I3.
+                </li>
+                <li>
+                  Identifier des anomalies de circulation avant et après l'introduction de I4.
+                </li>
+                <li>
+                  Prévoir le trafic pour les jours et mois suivants.
+                </li>
+              </ol>
+            </li>
+            <li>
+              <strong>Compétences Acquises :</strong>
+              <ul>
+                <li>
+                  Prétraitement des données : Agrégation et transformation des flux de trafic.
+                </li>
+                <li>
+                  Analyse descriptive : Comparaison des moyennes de trafic et identification des tendances.
+                </li>
+                <li>
+                  Modélisation et prévisions : Utilisation de méthodes de lissage et de modèles ARIMA pour les prévisions.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div id="cv" tabindex="0" style="box-shadow: none;">
+            <h3>Annexe 6 : SAE description et prévision de données temporelles</h3>
+            <iframe style="box-shadow: none;" src="SAE_Stat_Diop_Evina_Nikiema_Seck (1).pdf.2.pdf" title="Annexe 6 SAE description et prévision de données temporelles"></iframe>
+            <a href="SAE_Stat_Diop_Evina_Nikiema_Seck (1).pdf.2.pdf" class="download-cv" download>Télécharger l'annexe 6 (PDF)</a>
+          </div>
+        </details>
+      </div>
+    </article>
+
+    <article class="competence-item">
+      <header class="competence-header" tabindex="0" role="button" aria-expanded="false" aria-controls="comp3-content" onclick="toggleCompetence(this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleCompetence(this)">
+        Valoriser une production dans un contexte professionnel
+        <span class="toggle-icon">+</span>
+      </header>
+      <div id="comp3-content" class="competence-content" aria-hidden="true">
+        <h4>Valorisation professionnelle : Mettre en avant le meilleur de ma production</h4>
+        <p>
+          <strong>RGPD : Protéger les données, assurer la confiance</strong><br>
+          J'ai travaillé sur le RGPD dans le cadre de mon PPP. Ce projet m'a permis de m'approprier la démarche de connaissance de soi et de définir une stratégie personnelle pour la réalisation de mon projet professionnel.
+          En plus de mon PPP, j'ai également étudié le RGPD lors de cours de droit. Cette double approche m'a offert une compréhension approfondie des principes et des obligations liés à la protection des données personnelles.
+          <br><br><strong>Compétences acquises :</strong>
+          <ul>
+            <li>
+              Connaissance du RGPD : J'ai développé une solide compréhension du RGPD, y compris ses principes fondamentaux, ses droits des personnes concernées et ses obligations pour les organisations.
+            </li>
+            <li>
+              Sensibilisation à la confidentialité des données : J'ai acquis une sensibilisation à l'importance de préserver la confidentialité des données et de protéger la vie privée.
+            </li>
+            <li>
+              Connaissance du métier du RGPD : Je suis en mesure d'identifier les obligations légales auxquelles les organisations doivent se conformer en matière de protection des données. 
+            </li>
+          </ul>
+        </p>
+        <div id="cv" tabindex="0" style="box-shadow: none;">
+            <h4>Affiche PPP Spécialiste en RGPD</h4>
+            <iframe style="box-shadow: none;" src="Capture d'écran 2023-06-05 à 02.26.08.pdf" title="Affiche PPP Spécialiste en RGPD"></iframe>
+            <a href="Capture d'écran 2023-06-05 à 02.26.08.pdf" class="download-cv" download>Télécharger (PDF)</a>
+        </div><br>
+        <details>
+          <summary><strong>Gestion de projet: Projet enquete de santé publique</strong></summary>
+          <p>
+            Dans le cadre de mon cours de droit, j'ai collaboré avec deux autres camarades pour mener à bien un projet de santé publique initié par le ministère de l'agriculture. Notre objectif était d'appliquer les principes de la conduite de projet en suivant les étapes clés. Nous avons utilisé des outils tels que la bête à cornes, les arbres des objectifs, les fiches de tâches et le diagramme de Gantt pour structurer notre travail. À la fin du projet, nous avons produit un rapport détaillé comprenant ces éléments ainsi qu'un mini rapport de fin de mission.
+            <br><strong>Compétences acquises :</strong>
+            <ul>
+              <li>
+                Gestion de projet et coordination d'une équipe de travail
+              </li>
+              <li>
+                Évaluation de la faisabilité du projet
+              </li>
+              <li>
+                Utilisation d'outils tels que la Bête à Cornes, les Arbres des Objectifs ,les Fiches de Tâches 
+              </li>
+              <li>
+                Utilisation du diagramme de Gantt pour la planification des activités
+              </li>
+            </ul>
+          </p>
+        </details>
+        <details><summary><strong>Du trac à l'assurance: Ma progression en communication orale</strong></summary>
+          <p>
+            Le cours de Communication a été une expérience transformative pour moi, me permettant de surmonter mes craintes et d'améliorer mes compétences en prise de parole en public. Avant ce cours, j'étais mal à l'aise et peu confiante lorsqu'il s'agissait de parler devant un auditoire. Cependant, grâce à ce cours, j'ai pu progresser petit à petit, même si je continue à rencontrer des difficultés.
+            L'un des moments marquants de ce cours a été notre projet sur le talent unique. Nous devions présenter un pitch devant un public composé de plus de 60 personnes, comprenant les étudiants de la promotion, les professeurs et des chefs d'entreprise. Cela a été un défi intimidant, mais aussi une occasion unique de réfléchir à moi-même et à identifier mon talent spécifique.
+            J'ai choisi de présenter mon talent de cuisine lors de cet événement. C'était une expérience enrichissante qui m'a permis de mettre en valeur mes compétences culinaires devant un public diversifié.
+          </p>
+        </details>
+        <details><summary><strong>Anglais des affaires</strong></summary>
+          <p>
+            Le cours d'Anglais des Affaires a été une composante essentielle de ma formation, visant à renforcer mes compétences linguistiques dans le domaine professionnel. Malgré mes difficultés initiales en anglais de base, j'ai progressé de manière significative grâce à ce cours spécialisé.
+            J'ai acquis des compétences en anglais des affaires, notamment en ce qui concerne le vocabulaire spécifique à ce domaine. Cependant, j'ai rencontré des difficultés car je n'ai pas une maîtrise solide de l'anglais de base.
+          </p>
+        </details>
+        <details><summary><strong>Nouvelles Compétences Acquises en 2ème Année</strong></summary>
+        <p>
+          En deuxième année, nous avons approfondi les concepts abordés en première année sans introduire de nouveaux cours. Cette année a été marquée par une mise en pratique plus poussée et une consolidation des compétences précédemment acquises.
+          <ul>
+            
+            
+            <li>
+              <strong>Communication :</strong> Nous avons réalisé un mode d'emploi sur un logiciel utilisé dans notre formation, destiné aux étudiants de première année. J'ai choisi de créer un guide sur la bibliothèque Pandas de Python, disponible en annexe. De plus, nous avons appris à nous comporter en réunion d'entreprise, à débattre, convaincre et argumenter efficacement, nous préparant ainsi au monde professionnel.
+            </li>
+            <li>
+              <strong>Anglais :</strong> Nous avons passé des tests de niveau en début d'année, ce qui nous a permis d'être affectés à des groupes adaptés pour mieux comprendre les concepts linguistiques et améliorer nos compétences en anglais.
+            </li>
+            <li>
+              <strong>Économie :</strong> Nous avons exploré l'économie numérique à travers deux thèmes principaux :
+              <ul>
+                <li>
+                  Thème 1 : Plateformes numériques, données personnelles et démocratie
+                </li>
+                <li>
+                  Thème 2 : Les défis de la cybersécurité : risques économiques, géopolitiques et démocratiques
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h4>Compétences Acquises: </h4>
+          <ul>
+            <li>
+              <strong>Création de Modes d'Emploi : </strong>Capacité à expliquer clairement et pédagogiquement l'utilisation de logiciels, comme démontré avec la bibliothèque Pandas de Python.
+            </li>
+            <li><strong>Comportement Professionnel : </strong>Maîtrise des comportements et des attentes en réunion d'entreprise.</li>
+            <li><strong>Débat et Argumentation : </strong>Compétences en débat oratoire, conviction et argumentation.</li>
+            <li><strong>Anglais : </strong>Amélioration de la compréhension et de l'utilisation de l'anglais professionnel.</li>
+            <li><strong>Économie Numérique : </strong>Compréhension des enjeux économiques et géopolitiques liés aux plateformes numériques et à la cybersécurité.</li>
+          </ul>
+        </p>
+        </details>
+      </div>
+    </article>
+
+    <article class="competence-item">
+      <header class="competence-header" tabindex="0" role="button" aria-expanded="false" aria-controls="comp4-content" onclick="toggleCompetence(this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleCompetence(this)">
+        Modéliser les données dans un cadre statistique
+        <span class="toggle-icon">+</span>
+      </header>
+      <div id="comp4-content" class="competence-content" aria-hidden="true">
+        <p><strong>Techniques de sondage et méthodologie d'enquête :</strong>
+          <ol>
+            <li>
+              <b>Sondage aléatoire simple : </b>une méthode de sélection d'échantillon où chaque élément de la population a une probabilité égale d'être choisi.
+            </li>
+            <li>
+              <b>Sondage stratifié :</b> une approche visant à diviser la population en sous-groupes homogènes afin de garantir une représentation adéquate de chaque strate.
+            </li>
+            <li>
+              <b>Sondage à plusieurs degrés :</b> une méthode complexe impliquant plusieurs étapes de sélection d'échantillon pour des enquêtes de grande envergure.
+            </li>
+          </ol>
+          <strong>Compétences suivantes :</strong>
+          <ul>
+            <li>
+              Conception et mise en œuvre de sondages.
+            </li>
+            <li>
+              Sélection d'échantillon et estimation des caractéristiques de la population.
+            </li>
+            <li>
+              Techniques de stratification et de pondération pour assurer la représentativité des données.
+            </li>
+          </ul>
+        </p>
+        <p><strong>Comment l'utilisation intensive des réseaux sociaux impacte-t-elle la vie des étudiants ? </strong> <br>
+          Dans le cadre de la SAE "<b>Analyse et synthèse de données par échantillonnage</b>", notre groupe de 4 personnes a mis en pratique les concepts théoriques de la ressource "<b>Techniques de sondage et méthodologie d'enquête</b>". Sous la supervision de notre professeure, nous avons réalisé une enquête sur l'impact des réseaux sociaux sur la vie des étudiants. Cette expérience nous a permis d'appliquer concrètement les techniques de sondage et d'enquête acquises lors de cette unité d'enseignement, depuis la conception jusqu'à la réalisation de l'enquête <br>
+          <b>Méthodologie :</b><br>
+          Pour mener à bien cette étude, un échantillon représentatif d'environ 4000 étudiants de l'Université Clermont Auvergne a été sélectionné de manière aléatoire. Un questionnaire spécifiquement conçu pour explorer divers aspects de l'interaction des étudiants avec les réseaux sociaux a été administré aux participants. Avant sa mise en œuvre, le questionnaire a été testé et ajusté pour assurer sa clarté et sa pertinence. Les données collectées ont été prétraitées et analysées de manière descriptive, bivariée et factorielle.
+        </p>
+        <div id="cv" tabindex="0" style="box-shadow: none;">
+            <h4>Rapport SAE Analyse et synthèse de données par échantillonnage</h4>
+            <iframe style="box-shadow: none;" src="SAE_Sondage_rapport.pdf" title="Rapport SAE Analyse et synthèse de données par échantillonnage"></iframe>
+            <a href="SAE_Sondage_rapport.pdf" class="download-cv" download>Télécharger (PDF)</a>
+        </div><br>
+        <details>
+          <summary><strong>Expliquer ou prédire une variable quantitative à partir de plusieurs facteurs</strong></summary>
+          Dans le cadre de la SAE croisée "EMS/VCOD", nous avons travaillé en groupes composés de 2 étudiants du parcours EMS (Exploration et Modélisation Statistique) et 2 étudiants du parcours VCOD (Visualisation et Conception d'Outils Décisionnels). En tant qu'étudiante en parcours EMS, mon binôme et moi avons effectué le prétraitement, l'analyse, et la visualisation des données récupérées sur le web par nos collègues VCOD. Ce projet interdisciplinaire nous a permis de collaborer efficacement pour mener à bien une étude complète.
+          <br><b>Compétences Acquises</b>
+          <ul>
+            <li>
+              <b>Prétraitement des Données :</b> Acquisition de compétences en nettoyage et organisation des données.
+            </li>
+            <li>
+              <b>Analyse Statistique :</b> Application de techniques de modélisation et d'analyse pour interpréter les données.
+            </li>
+            <li>
+              <b>Visualisation des Données :</b> Création de visualisations claires et informatives pour présenter les résultats.
+            </li>
+            <li>
+              <b>Collaboration Interdisciplinaire :</b> Travail en équipe avec des étudiants de différents parcours, favorisant la complémentarité des compétences.
+            </li>
+            <li><b>Utilisation d'Outils Informatiques : </b>Maîtrise de Git pour la gestion du code et de bases de données pour le stockage des données.
+            </li>
+          </ul>
+          <div id="cv" tabindex="0" style="box-shadow: none;">
+            <h4>SAE croisée EMS VCOD</h4>
+            <iframe style="box-shadow: none;" src="Rapport_synthèse .pdf" title="SAE croisée EMS VCOD"></iframe>
+            <a href="Rapport_synthèse .pdf" class="download-cv" download>Télécharger (PDF)</a>
+        </div>
+        </details>
+      </div>
+    </article>
+  </section>
+
+
+</body>
+</html>
+
+  <!-- Stage -->
+  <section id="stage" tabindex="0" style="scroll-margin-bottom: -810px;">
+    <h2>Expériences Professionnelles</h2>
+    
+    <div class="stage-container">
+      <!-- Stage actuel - Analyste en intelligence d'affaires -->
+      <div class="stage-item">
+        <div class="stage-header">
+          <h3 class="stage-title">
+            <span class="icon"></span>
+            Stage – Analyste en intelligence d'affaires
+            <span class="stage-badge status-current">EN COURS</span>
+          </h3>
+          <div class="stage-company">Ministère de la cybersécurité et du numérique</div>
+          <div class="stage-company" style="font-size: 1rem; font-weight: 500; color: var(--text-secondary);">
+            Service de la valorisation des données et de l'optimisation des processus (SVDOP)
+          </div>
+          <div class="stage-location">
+            <span class="icon"></span>
+            Québec, Canada
+          </div>
+          <div class="stage-duration">
+            <span class="icon"></span>
+            Janvier – Août 2025
+          </div>
+        </div>
+
+        <div class="stage-content">
+          <div class="stage-section">
+            <h3><span class="icon"></span> Objectifs du stage</h3>
+            <p>Renforcer la qualité et la fiabilité des tableaux de bord Power BI utilisés pour le suivi des projets internes.</p>
+          </div>
+
+          <div class="stage-section">
+            <h3><span class="icon"></span> Tâches réalisées</h3>
+            <ul>
+              <li>Analyse des modèles de données utilisés dans les rapports existants</li>
+              <li>Optimisation des relations entre tables et restructuration du modèle dans Power BI</li>
+              <li>Automatisation de traitements manuels avec des requêtes SQL (Oracle)</li>
+              <li>Nettoyage de données, standardisation des libellés, vérification des champs incohérents</li>
+              <li>Collaboration à distance avec l'équipe (Teams, Excel, Power BI Service)</li>
+            </ul>
+          </div>
+
+          <div class="stage-section">
+            <h3><span class="icon"></span> Contexte du stage</h3>
+            <ul>
+              <li>Commencé à temps partiel en janvier (durant la session d'hiver)</li>
+              <li>Poursuivi à temps plein à partir de mai (stage d'été)</li>
+            </ul>
+          </div>
+
+          <div class="stage-section">
+            <h3><span class="icon"></span> Compétences développées</h3>
+            <div class="competences-grid">
+              <div class="competence-badge">
+                Utilisation avancée de Power BI (modélisation, nettoyage, visualisation)
+              </div>
+              <div class="competence-badge">
+                Rédaction de requêtes SQL complexes
+              </div>
+              <div class="competence-badge">
+                Autonomie et rigueur dans un environnement professionnel structuré
+              </div>
+              <div class="competence-badge">
+                Communication claire avec une équipe à distance
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage précédent - Chargée d'études statistiques -->
+      <div class="stage-item">
+        <div class="stage-header">
+          <h3 class="stage-title">
+            <span class="icon"></span>
+            Stage – Chargée d'études statistiques
+            <span class="stage-badge status-completed">TERMINÉ</span>
+          </h3>
+          <div class="stage-company">Observatoire des Formations et du Devenir des Étudiants (OFDE)</div>
+          <div class="stage-company" style="font-size: 1rem; font-weight: 500; color: var(--text-secondary);">
+            Université Clermont Auvergne
+          </div>
+          <div class="stage-location">
+            <span class="icon"></span>
+            Clermont-Ferrand, France
+          </div>
+          <div class="stage-duration">
+            <span class="icon"></span>
+            Avril – Juin 2024 (12 semaines)
+          </div>
+        </div>
+
+        <div class="stage-content">
+          <div class="stage-section">
+            <h3><span class="icon"></span> Objectifs du stage</h3>
+            <p>Mener une enquête sur le devenir des diplômés en études paramédicales afin de fournir des données utiles à l'analyse des parcours post-diplôme.</p>
+          </div>
+
+          <div class="stage-section">
+            <h3><span class="icon"></span> Tâches réalisées</h3>
+            <ul>
+              <li>Conception complète du questionnaire (structure, formulation, objectifs visés)</li>
+              <li>Diffusion de l'enquête auprès du public cible et relances</li>
+              <li>Nettoyage des données collectées et traitement statistique (R studio, Excel, Sphinx)</li>
+              <li>Analyse des résultats avec rédaction d'un rapport synthétique illustré de tableaux et graphiques</li>
+              <li>Restitution claire et adaptée à un public non spécialiste</li>
+            </ul>
+          </div>
+
+          <div class="stage-section">
+            <h3><span class="icon"></span> Compétences développées</h3>
+            <div class="competences-grid">
+              <div class="competence-badge">
+                Rigueur dans la méthodologie d'enquête
+              </div>
+              <div class="competence-badge">
+                Traitement et interprétation de données réelles
+              </div>
+              <div class="competence-badge">
+                Autonomie dans la gestion de projet
+              </div>
+              <div class="competence-badge">
+                Capacité à rendre les résultats compréhensibles et exploitables
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv-cv" class="cv" tabindex="0" style="scroll-margin-bottom: -810px;">
+    <h2>Curriculum Vitae</h2>
+    <div class="cv-tabs" role="region" aria-label="Sélecteur de CV">
+      <div class="tablist" role="tablist" aria-label="CV tabs">
+        <button class="tab active" role="tab" aria-selected="true" aria-controls="cv1-panel" id="cv1-tab">CV 1</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="cv2-panel" id="cv2-tab" tabindex="-1">CV 2</button>
+      </div>
+      <div class="tab-panels">
+        <div id="cv1-panel" class="tab-panel" role="tabpanel" aria-labelledby="cv1-tab">
+          <iframe src="CV_Coumba_Diop_Analyste_donnéesUca.pdf" title="CV 1 - Coumba Diop"></iframe>
+          <a href="CV_Coumba_Diop_Analyste_donnéesUca.pdf" class="download-cv" download>Télécharger ce CV (PDF)</a>
+        </div>
+        <div id="cv2-panel" class="tab-panel" role="tabpanel" aria-labelledby="cv2-tab" hidden>
+          <iframe data-src="CV_Coumba_Diop_VF.pdf" title="CV 2 - Coumba Diop"></iframe>
+          <a href="CV_Coumba_Diop_VF.pdf" class="download-cv" download>Télécharger ce CV (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- Pied de page à ajouter avant la fermeture du body -->
+<footer>
+<div class="footer-content">
+  <h3 class="footer-title">Restons en contact</h3>
+  <p class="footer-subtitle">N'hésitez pas à me contacter pour discuter de vos projets</p>
+  
+  <div class="social-links">
+    <a href="https://www.linkedin.com/in/coumba-diop-7a0a93257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
+      <svg class="social-icon" viewBox="0 0 24 24">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      LinkedIn
+    </a>
+    
+    <a href="https://mail.google.com/mail/?view=cm&to=diopcoumba2004@gmail.com" class="social-link email" target="_blank">
+      <svg class="social-icon" viewBox="0 0 24 24">
+        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.98L12 8.773l9.382-4.952h.982C23.268 3.821 24 4.553 24 5.457z"/>
+      </svg>
+      Gmail
+    </a>
+  </div>
+  
+  <div class="footer-divider"></div>
+  
+  <p class="footer-bottom">
+    © 2025 Coumba DIOP. Tous droits réservés.
+  </p>
+</div>
+</footer>
+<!-- Modal À propos -->
+<div class="modal-overlay" id="apropos-modal" aria-hidden="true" role="dialog" aria-label="Document À propos">
+  <div class="modal">
+    <button class="modal-close" id="close-apropos-modal" aria-label="Fermer">×</button>
+    <iframe src="Presentation_CD_VF.pdf" title="À propos de l'auteur"></iframe>
+  </div>
+  
+</div>
+<script>
+  // Navigation active link on scroll
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 200;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+  // Toggle competence details
+  function toggleCompetence(header) {
+    const content = header.nextElementSibling;
+    const expanded = header.getAttribute('aria-expanded') === 'true';
+
+    // Close all
+    document.querySelectorAll('.competence-header').forEach(h => {
+      h.setAttribute('aria-expanded', 'false');
+      h.querySelector('.toggle-icon').classList.remove('rotate');
+      h.nextElementSibling.classList.remove('show');
+      h.nextElementSibling.setAttribute('aria-hidden', 'true');
+    });
+
+    if (!expanded) {
+      header.setAttribute('aria-expanded', 'true');
+      header.querySelector('.toggle-icon').classList.add('rotate');
+      content.classList.add('show');
+      content.setAttribute('aria-hidden', 'false');
+    //   content.scrollIntoView({behavior: 'smooth', block: 'start'});
+    const yOffset = -150; // hauteur du menu sticky (ajuste si besoin)
+    const y = content.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({top: y, behavior: 'smooth'});
+    }
+  }
+
+  // À propos modal behavior
+  const openAproposBtn = document.getElementById('open-apropos-doc');
+  const aproposModal = document.getElementById('apropos-modal');
+  const closeAproposBtn = document.getElementById('close-apropos-modal');
+
+  if (openAproposBtn && aproposModal && closeAproposBtn) {
+    const openModal = () => {
+      aproposModal.classList.add('show');
+      aproposModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeModal = () => {
+      aproposModal.classList.remove('show');
+      aproposModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+    openAproposBtn.addEventListener('click', openModal);
+    closeAproposBtn.addEventListener('click', closeModal);
+    aproposModal.addEventListener('click', (e) => { if (e.target === aproposModal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  }
+
+  // À propos collapsible text behavior
+  const toggleAproposBtn = document.getElementById('toggle-apropos');
+  const aproposCollapsible = document.getElementById('apropos-collapsible');
+  if (toggleAproposBtn && aproposCollapsible) {
+    toggleAproposBtn.addEventListener('click', () => {
+      const isExpanded = aproposCollapsible.classList.toggle('expanded');
+      toggleAproposBtn.setAttribute('aria-expanded', String(isExpanded));
+      toggleAproposBtn.textContent = isExpanded ? 'Lire moins' : 'Lire plus';
+    });
+  }
+
+  // CV Tabs logic with lazy loading for second iframe
+  (function initCvTabs() {
+    const tablist = document.querySelector('#cv-cv .tablist');
+    if (!tablist) return;
+    const tabs = Array.from(tablist.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('#cv-cv .tab-panel'));
+
+    function activateTab(nextTab) {
+      tabs.forEach(tab => {
+        const isActive = tab === nextTab;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+        tab.setAttribute('tabindex', isActive ? '0' : '-1');
+        const panelId = tab.getAttribute('aria-controls');
+        const panel = document.getElementById(panelId);
+        if (panel) {
+          if (isActive) {
+            panel.removeAttribute('hidden');
+            const iframe = panel.querySelector('iframe');
+            if (iframe && !iframe.getAttribute('src')) {
+              const dataSrc = iframe.getAttribute('data-src');
+              if (dataSrc) iframe.setAttribute('src', dataSrc);
+            }
+          } else {
+            panel.setAttribute('hidden', '');
+          }
+        }
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab));
+      tab.addEventListener('keydown', (e) => {
+        const index = tabs.indexOf(tab);
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          const next = tabs[(index + 1) % tabs.length];
+          next.focus();
+          activateTab(next);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const prev = tabs[(index - 1 + tabs.length) % tabs.length];
+          prev.focus();
+          activateTab(prev);
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
