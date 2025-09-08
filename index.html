@@ -1320,7 +1320,7 @@
 
   @media (max-width: 480px) {
     main {
-      padding: 0 0.5rem;
+      padding: 10.5rem 0.5rem;
     }
     
     section {
@@ -2027,7 +2027,7 @@
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 200;
+      const sectionTop = section.offsetTop - 200; // initial - 200
       if (pageYOffset >= sectionTop) {
         current = section.getAttribute('id');
       }
@@ -2059,7 +2059,7 @@
       content.classList.add('show');
       content.setAttribute('aria-hidden', 'false');
     //   content.scrollIntoView({behavior: 'smooth', block: 'start'});
-    const yOffset = -150; // hauteur du menu sticky (ajuste si besoin)
+    const yOffset = -150; // initial -150
     const y = content.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({top: y, behavior: 'smooth'});
     }
@@ -2097,55 +2097,6 @@
       toggleAproposBtn.textContent = isExpanded ? 'Lire moins' : 'Lire plus';
     });
   }
-
-  // // CV Tabs logic with lazy loading for second iframe
-  // (function initCvTabs() {
-  //   const tablist = document.querySelector('#cv-cv .tablist');
-  //   if (!tablist) return;
-  //   const tabs = Array.from(tablist.querySelectorAll('.tab'));
-  //   const panels = Array.from(document.querySelectorAll('#cv-cv .tab-panel'));
-
-  //   function activateTab(nextTab) {
-  //     tabs.forEach(tab => {
-  //       const isActive = tab === nextTab;
-  //       tab.classList.toggle('active', isActive);
-  //       tab.setAttribute('aria-selected', String(isActive));
-  //       tab.setAttribute('tabindex', isActive ? '0' : '-1');
-  //       const panelId = tab.getAttribute('aria-controls');
-  //       const panel = document.getElementById(panelId);
-  //       if (panel) {
-  //         if (isActive) {
-  //           panel.removeAttribute('hidden');
-  //           const iframe = panel.querySelector('iframe');
-  //           if (iframe && !iframe.getAttribute('src')) {
-  //             const dataSrc = iframe.getAttribute('data-src');
-  //             if (dataSrc) iframe.setAttribute('src', dataSrc);
-  //           }
-  //         } else {
-  //           panel.setAttribute('hidden', '');
-  //         }
-  //       }
-  //     });
-  //   }
-
-  //   tabs.forEach(tab => {
-  //     tab.addEventListener('click', () => activateTab(tab));
-  //     tab.addEventListener('keydown', (e) => {
-  //       const index = tabs.indexOf(tab);
-  //       if (e.key === 'ArrowRight') {
-  //         e.preventDefault();
-  //         const next = tabs[(index + 1) % tabs.length];
-  //         next.focus();
-  //         activateTab(next);
-  //       } else if (e.key === 'ArrowLeft') {
-  //         e.preventDefault();
-  //         const prev = tabs[(index - 1 + tabs.length) % tabs.length];
-  //         prev.focus();
-  //         activateTab(prev);
-  //       }
-  //     });
-  //   });
-  // })();
 </script>
 </body>
 </html>
